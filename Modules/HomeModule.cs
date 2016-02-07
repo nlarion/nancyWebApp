@@ -1,4 +1,5 @@
 using Nancy;
+using Letter.Objects;
 
 namespace FriendLetter
 {
@@ -6,10 +7,13 @@ namespace FriendLetter
   {
     public HomeModule()
     {
-      Get["/hello"] = _ => "Hello friend!";
-      Get["/goodbye"] = _ => "Goodbye friend!";
-      Get["/"] = _ => View["hello.html"];
-      Get["/favorite_photos"] = _ => View["favorite_photos.html"];
+      Get["/"] = _ => {
+        LetterVariables myLetterVariables = new LetterVariables {
+          Recipient = "Eric",
+          Sender = "John"
+        };
+        return View["hello.html", myLetterVariables];
+      };
     }
   }
 }
